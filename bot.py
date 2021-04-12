@@ -11,11 +11,11 @@ token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
 
-# @bot.message_handler(commands=['start', 'go'])
-# def start_handler(message):
-#     bot.send_message(message.chat.id, 'Привет, когда я вырасту, я стану умнее')
+@bot.message_handler(commands=['start', 'go'])
+def start_handler(message):
+    bot.send_message(message.chat.id, 'Привет, когда я вырасту, я стану умнее')
 
 
-# bot.polling()
 print(token)
 print(bot)
+bot.polling()
