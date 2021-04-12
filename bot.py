@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # import redis
 import os
-# import telebot
+import telebot
 
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
 # some_api_token = os.environ['SOME_API_TOKEN']
 
 #       Your bot code below
-# bot = telebot.TeleBot(token)
+bot = telebot.TeleBot(token)
 
 
 # @bot.message_handler(commands=['start', 'go'])
@@ -18,3 +18,4 @@ token = os.environ['TELEGRAM_TOKEN']
 
 # bot.polling()
 print(token)
+print(bot)
