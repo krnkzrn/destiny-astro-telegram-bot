@@ -4,6 +4,7 @@ import os
 import telebot
 import schedule
 import time
+import threading
 
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
@@ -18,10 +19,14 @@ def start_handler(message):
     bot.send_message(message.chat.id, 'Привет, когда я вырасту, я стану умнее')
     print(message)
 
-def job():
-    bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки')
+def job_threading():
+    schedule.every(5).minutes.do(bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки'))
+    while 1:
+        schedule.run_pending()
+        time.sleep(1)
 
-schedule.every(5).minutes.do(job)
+job_thread = threading.Thread(target=job_threading())
+job_thread.start()
 print(token)
 print(bot)
 bot.polling()
