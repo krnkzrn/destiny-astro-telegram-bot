@@ -19,8 +19,11 @@ def start_handler(message):
     bot.send_message(message.chat.id, 'Привет, когда я вырасту, я стану умнее')
     print(message)
 
+def echoToChat():
+    bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки')
+
 def job_threading():
-    schedule.every(5).minutes.do(bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки'))
+    schedule.every(5).minutes.do(echoToChat)
     while 1:
         schedule.run_pending()
         time.sleep(1)
