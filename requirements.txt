@@ -1,5 +1,5 @@
 # List of required packages (Dependencies)
-PyTelegramBotAPI
+PyTelegramBotAPI==2.2.3
 telebot
 
 # If you need to specify a version
