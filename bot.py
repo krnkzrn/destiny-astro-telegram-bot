@@ -5,10 +5,11 @@ import telebot
 import schedule
 import time
 import threading
+import fileprocessor
 
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
-# some_api_token = os.environ['SOME_API_TOKEN']
+publish_updates = os.environ['PUBLISH_UPDATES']
 
 #       Your bot code below
 bot = telebot.TeleBot(token)
@@ -23,7 +24,8 @@ def echoToChat():
     bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки')
 
 def job_threading():
-    schedule.every(5).minutes.do(echoToChat)
+    if publish_updates == 'TRUE':
+        schedule.every(5).minutes.do(echoToChat)
     while 1:
         schedule.run_pending()
         time.sleep(1)
