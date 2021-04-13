@@ -21,17 +21,18 @@ def start_handler(message):
     print(message)
 
 def echoToChat():
-    bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки')
+    if publish_updates == 'TRUE':
+        print('Sending update')
+        bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки')
+    else:
+        print('Updates are off')
 
 def job_threading():
-    if publish_updates == 'TRUE':
-        schedule.every(5).minutes.do(echoToChat)
+    schedule.every(5).minutes.do(echoToChat)
     while 1:
         schedule.run_pending()
         time.sleep(1)
 
 job_thread = threading.Thread(target=job_threading())
 job_thread.start()
-print(token)
-print(bot)
 bot.polling()
