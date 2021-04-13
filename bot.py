@@ -33,6 +33,7 @@ def job_threading():
         schedule.run_pending()
         time.sleep(1)
 
+bot.polling()
 job_thread = threading.Thread(target=job_threading())
 job_thread.start()
-bot.polling()
+
