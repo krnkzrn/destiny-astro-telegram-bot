@@ -4,7 +4,6 @@ import os
 import telebot
 # import schedule
 # import time
-import pprint
 
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
@@ -17,8 +16,7 @@ bot = telebot.TeleBot(token)
 @bot.message_handler(commands=['start', 'go'])
 def start_handler(message):
     bot.send_message(message.chat.id, 'Привет, когда я вырасту, я стану умнее')
-    # print(message)
-    pprint.pprint(message)
+    print(message)
 
 # def job():
 #     bot.send_message()
