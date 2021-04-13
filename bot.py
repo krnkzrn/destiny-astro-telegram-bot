@@ -2,8 +2,8 @@
 # import redis
 import os
 import telebot
-# import schedule
-# import time
+import schedule
+import time
 
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
@@ -18,10 +18,10 @@ def start_handler(message):
     bot.send_message(message.chat.id, 'Привет, когда я вырасту, я стану умнее')
     print(message)
 
-# def job():
-#     bot.send_message()
+def job():
+    bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки')
 
-
+schedule.every(5).minutes.do(job)
 print(token)
 print(bot)
 bot.polling()
