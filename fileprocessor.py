@@ -1,8 +1,8 @@
 import pandas
 from datetime import date
 
-df = pandas.read_csv('activations.csv',header=0)
-dc = pandas.read_csv('client_base.csv',header=0)
+df = pandas.read_csv('resources/activations.csv',header=0)
+dc = pandas.read_csv('resources/client_base.csv',header=0)
 
 # def week_activations():
 today = date.today()
