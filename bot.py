@@ -9,7 +9,6 @@ import fileprocessor
 
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
-publish_updates = os.environ['PUBLISH_UPDATES']
 
 #       Your bot code below
 bot = telebot.TeleBot(token)
@@ -21,7 +20,7 @@ def start_handler(message):
     print(message)
 
 def echoToChat():
-    if publish_updates == 'TRUE':
+    if os.environ['PUBLISH_UPDATES'] == 'TRUE':
         print('Sending update')
         bot.send_message(-543753474, 'Я тут буду публиковать всякие штуки')
     else:
