@@ -1,13 +1,19 @@
-# import pandas
-from datetime import date
+import pandas
+import datetime
 
-# df = pandas.read_csv('resources/activations.csv',header=0)
+df = pandas.read_csv('resources/activations.csv',header=0,parse_dates=['Дата','Время'])
 # dc = pandas.read_csv('resources/client_base.csv',header=0)
 
-# def week_activations():
-today = date.today()
+today = datetime.date.today()
 print('Today is ',today)
 
+start = today - datetime.timedelta(days=today.weekday())
+end = start + datetime.timedelta(days=6)
+startD = pandas.to_datetime(start)
+endD = pandas.to_datetime(end)
+this_week_activations = df[(df['Дата']>startD)&(df['Дата']<endD)]
+
+def 
 
 # for index, row in dc.iterrows():
 #     print(row['НС дня рождения'], row['НС года рождения'], row['ЗВ дня рождения'], row['ЗВ года рождения'])
