@@ -5,7 +5,7 @@ import telebot
 import schedule
 import time
 import threading
-import fileprocessor
+# import fileprocessor
 
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
