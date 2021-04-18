@@ -1,4 +1,6 @@
 # List of required packages (Dependencies)
+python-telegram-bot
 PyTelegramBotAPI==2.2.3
 schedule
 pandas
+datetime
