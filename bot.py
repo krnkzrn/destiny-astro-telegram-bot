@@ -19,7 +19,6 @@ token = os.environ['TELEGRAM_TOKEN']
 #       Your bot code below
 bot = telebot.TeleBot(token)
 user = User()
-is_dialog_in_progress = False
 
 @bot.message_handler(commands=['start', 'go'])
 def start_handler(message):
@@ -33,25 +32,24 @@ def print_start_dialog(message_chat_id):
     markup.row(telebot.types.InlineKeyboardButton('Помощь',callback_data='help'),
                telebot.types.InlineKeyboardButton('Связаться с нами',callback_data='contacts'))
 
-    is_dialog_in_progress = True
     bot.send_message(message_chat_id, 'Чем я могу вам помочь? В любой момент вы можете прервать диалог с помощью команды /end', reply_markup=markup)
     # print(message)
 
 @bot.message_handler(commands=['end'])
 def reset_dialog(message):
     user = User()
-    is_dialog_in_progress = False
     bot.send_message(message.chat.id, 'Что бы снова начать диалог используейте команду /start')
 
 @bot.callback_query_handler(func=lambda call:True)
 def register_name(query):
+    print("QUERY:")
     print(query)
+    bot.answer_callback_query(query.id)
     if query.data == 'register':
-        if is_dialog_in_progress :
-            user = User()
-            bot.answer_callback_query(query.id)
-            msg = bot.send_message(query.message.chat.id, 'Введите свои ФИО')
-            bot.register_next_step_handler(msg, register_save_name)
+        print("Query to register")
+        user = User()
+        msg = bot.send_message(query.message.chat.id, 'Введите свои ФИО')
+        bot.register_next_step_handler(msg, register_save_name)
 
 def register_save_name(message):
     user.name = datetime.datetime(message.text)
