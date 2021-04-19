@@ -43,12 +43,16 @@ def reser_dialog(message):
     is_dialog_in_progress = False
     bot.send_message(message.chat.id, 'Что бы снова начать диалог используейте команду /start')
 
-@bot.message_handler(commands=['register'])
-def register_name(message):
-    if is_dialog_in_progress :
-        user = User()
-        msg = bot.send_message(message.chat.id, 'Введите свои ФИО')
-        bot.register_next_step_handler(msg, register_save_name)
+# @bot.message_handler(commands=['register'])
+@bot.callback_query_handler(func=lambda call:True)
+def register_name(query):
+    print(query)
+    if query.data == 'register':
+        if is_dialog_in_progress :
+            user = User()
+            bot.answer_callback_query(query.id)
+            msg = bot.send_message(query.message.chat.id, 'Введите свои ФИО')
+            bot.register_next_step_handler(msg, register_save_name)
 
 def register_save_name(message):
     user.name = datetime.datetime(message.text)
