@@ -57,7 +57,7 @@ def register_save_name(message):
     bot.register_next_step_handler(msg, register_birthday)
 
 def register_birthday(message):
-    user.birthdate = datetime.date(message.text)
+    user.birthdate = datetime.datetime.strptime(message.text)
     user.userid = message.from_user.id
     bot.send_message(message.chat.id, 'Спасибо, {name}, вы успешно зарегистрированы с id {id}.'.format(name=user.name,id=user.userid))
     print(user)
