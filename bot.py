@@ -26,24 +26,22 @@ def start_handler(message):
     print_start_dialog(message.chat.id)
 
 def print_start_dialog(message_chat_id):
-    markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True)
+    markup = telebot.types.InlineKeyboardMarkup()
     markup.row(telebot.types.InlineKeyboardButton('Зарегистрироваться',callback_data='register'))
     markup.row('Оформить подписку')
     markup.row('Узнать активации на эту неделю')
-    markup.row('Помощь')
-    markup.row('Связаться с нами')
+    markup.row('Помощь','Связаться с нами')
 
     is_dialog_in_progress = True
-    msg = bot.send_message(message_chat_id, 'Чем я могу вам помочь? В любой момент вы можете прервать диалог с помощью команды /end', reply_markup=markup)
+    bot.send_message(message_chat_id, 'Чем я могу вам помочь? В любой момент вы можете прервать диалог с помощью команды /end', reply_markup=markup)
     # print(message)
 
 @bot.message_handler(commands=['end'])
-def reser_dialog(message):
+def reset_dialog(message):
     user = User()
     is_dialog_in_progress = False
     bot.send_message(message.chat.id, 'Что бы снова начать диалог используейте команду /start')
 
-# @bot.message_handler(commands=['register'])
 @bot.callback_query_handler(func=lambda call:True)
 def register_name(query):
     print(query)
