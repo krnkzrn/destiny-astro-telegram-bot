@@ -27,7 +27,7 @@ def start_handler(message):
 
 def print_start_dialog(message_chat_id):
     markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    markup.row('Зарегистрироваться')
+    markup.row(telebot.types.InlineKeyboardButton('Зарегистрироваться',callback_data='register'))
     markup.row('Оформить подписку')
     markup.row('Узнать активации на эту неделю')
     markup.row('Помощь')
@@ -43,7 +43,7 @@ def reser_dialog(message):
     is_dialog_in_progress = False
     bot.send_message(message.chat.id, 'Что бы снова начать диалог используейте команду /start')
 
-@bot.message_handler(commands=['Зарегистрироваться','register'])
+@bot.message_handler(commands=['register'])
 def register_name(message):
     if is_dialog_in_progress :
         user = User()
@@ -59,6 +59,7 @@ def register_birthday(message):
     user.birthdate = datetime.date(message.text)
     user.userid = message.from_user.id
     bot.send_message(message.chat.id, 'Спасибо, {name}, вы успешно зарегистрированы с id {id}.'.format(name=user.name,id=user.userid))
+    print(user)
     print_start_dialog(message.chat.id)
 
 def echoToChat():
