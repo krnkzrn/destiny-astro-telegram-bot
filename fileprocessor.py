@@ -17,7 +17,7 @@ dc = pandas.read_csv('resources/client_base.csv',header=0)
 def add_client(client):
     if isinstance(client, user.User) :
         global dc
-        dc = dc.append(client.asdict())
+        dc = dc.append(client.asdict(),ignore_index=True)
 
 def print_all_clients():
     print(dc)
