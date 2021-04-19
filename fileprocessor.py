@@ -1,19 +1,29 @@
 import pandas
-import datetime
+# import datetime
+import user
 
-df = pandas.read_csv('resources/activations.csv',header=0,parse_dates=['Дата','Время'])
-# dc = pandas.read_csv('resources/client_base.csv',header=0)
+# df = pandas.read_csv('resources/activations.csv',header=0,parse_dates=['Дата','Время'])
+dc = pandas.read_csv('resources/client_base.csv',header=0)
 
-today = datetime.date.today()
-print('Today is ',today)
+# today = datetime.date.today()
+# print('Today is ',today)
+#
+# start = today - datetime.timedelta(days=today.weekday())
+# end = start + datetime.timedelta(days=6)
+# startD = pandas.to_datetime(start)
+# endD = pandas.to_datetime(end)
+# this_week_activations = df[(df['Дата']>startD)&(df['Дата']<endD)]
 
-start = today - datetime.timedelta(days=today.weekday())
-end = start + datetime.timedelta(days=6)
-startD = pandas.to_datetime(start)
-endD = pandas.to_datetime(end)
-this_week_activations = df[(df['Дата']>startD)&(df['Дата']<endD)]
+def add_client(client):
+    if isinstance(client, user.User) :
+        global dc
+        dc = dc.append(client.asdict())
 
-def 
+def print_all_clients():
+    print(dc)
+
+def is_client_active(userid):
+    print(dc[(dc['id']==userid)])
 
 # for index, row in dc.iterrows():
 #     print(row['НС дня рождения'], row['НС года рождения'], row['ЗВ дня рождения'], row['ЗВ года рождения'])

@@ -6,19 +6,15 @@ import schedule
 import time
 import threading
 import datetime
-# import fileprocessor
-
-class User:
-    name=''
-    birthdate=datetime.date.today()
-    userid=''
+import fileprocessor
+import user
 
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
 
 #       Your bot code below
 bot = telebot.TeleBot(token)
-user = User()
+user = user.User()
 
 @bot.message_handler(commands=['start', 'go'])
 def start_handler(message):
@@ -37,7 +33,7 @@ def print_start_dialog(message_chat_id):
 
 @bot.message_handler(commands=['end'])
 def reset_dialog(message):
-    user = User()
+    user.reset()
     bot.send_message(message.chat.id, 'Что бы снова начать диалог используейте команду /start')
 
 @bot.callback_query_handler(func=lambda call:True)
@@ -47,26 +43,33 @@ def register_name(query):
     bot.answer_callback_query(query.id)
     if query.data == 'register':
         print("Query to register")
-        user = User()
-        msg = bot.send_message(query.message.chat.id, 'Введите свои ФИО')
+        user.reset()
+        msg = bot.send_message(query.message.chat.id, 'Как к вам обращаться?')
         bot.register_next_step_handler(msg, register_save_name)
+    elif query.data == 'subscribe':
+        is_active = fileprocessor.is_client_active(query.message.from_user.id)
+        bot.send_message(query.message.chat.id, 'У вас {ny}активная подписка'.format(ny=(is_active and '' or 'не ')))
+    else:
+        bot.send_message(query.message.chat.id, 'В разработке')
 
 def register_save_name(message):
     user.name = message.text
     register_request_birthday(message)
 
 def register_request_birthday(message):
-    msg = bot.send_message(message.chat.id, 'Введите дату рождения (формат: дд.мм.гггг)')
+    msg = bot.send_message(message.chat.id, 'Введите дату своего рождения (формат: дд.мм.гггг)')
     bot.register_next_step_handler(msg, register_birthday)
 
 def register_birthday(message):
     try:
         user.birthdate = datetime.datetime.strptime(message.text,'%d.%m.%Y')
         user.userid = message.from_user.id
+        user.active = True
+        fileprocessor.add_client(user)
+        fileprocessor.print_all_clients()
         bot.send_message(message.chat.id,
                          'Спасибо, {name}, вы успешно зарегистрированы с id {id}.'.format(name=user.name,
                                                                                           id=user.userid))
-        print(user)
         print_start_dialog(message.chat.id)
     except ValueError:
             msg = bot.send_message(message.chat.id, 'Ошибка в дате рождения. Пожалуйста проверьте формат.')
@@ -86,6 +89,6 @@ def job_threading():
         time.sleep(1)
 
 bot.polling()
-job_thread = threading.Thread(target=job_threading())
-job_thread.start()
+# job_thread = threading.Thread(target=job_threading())
+# job_thread.start()
 
