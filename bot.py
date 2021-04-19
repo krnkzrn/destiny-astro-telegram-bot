@@ -52,7 +52,7 @@ def register_name(query):
         bot.register_next_step_handler(msg, register_save_name)
 
 def register_save_name(message):
-    user.name = datetime.datetime(message.text)
+    user.name = message.text
     msg = bot.send_message(message.chat.id, 'Введите дату рождения')
     bot.register_next_step_handler(msg, register_birthday)
 
