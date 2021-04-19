@@ -53,6 +53,9 @@ def register_name(query):
 
 def register_save_name(message):
     user.name = message.text
+    register_request_birthday(message)
+
+def register_request_birthday(message):
     msg = bot.send_message(message.chat.id, 'Введите дату рождения (формат: дд.мм.гггг)')
     bot.register_next_step_handler(msg, register_birthday)
 
@@ -67,7 +70,7 @@ def register_birthday(message):
         print_start_dialog(message.chat.id)
     except ValueError:
             msg = bot.send_message(message.chat.id, 'Ошибка в дате рождения. Пожалуйста проверьте формат.')
-            register_save_name(msg)
+            register_request_birthday(msg)
 
 def echoToChat():
     if os.environ['PUBLISH_UPDATES'] == 'TRUE':
