@@ -43,7 +43,7 @@ def reser_dialog(message):
     is_dialog_in_progress = False
     bot.send_message(message.chat.id, 'Что бы снова начать диалог используейте команду /start')
 
-@bot.message_handler(regexp='Зарегистрироваться')
+@bot.message_handler(commands=['Зарегистрироваться','register'])
 def register_name(message):
     if is_dialog_in_progress :
         user = User()
