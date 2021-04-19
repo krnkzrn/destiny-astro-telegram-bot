@@ -22,6 +22,7 @@ def start_handler(message):
 
 def print_start_dialog(message_chat_id):
     markup = telebot.types.InlineKeyboardMarkup()
+    markup.row(telebot.types.InlineKeyboardButton('Test',callback_data='test'))
     markup.row(telebot.types.InlineKeyboardButton('Зарегистрироваться',callback_data='register'))
     markup.row(telebot.types.InlineKeyboardButton('Оформить подписку',callback_data='subscribe'))
     markup.row(telebot.types.InlineKeyboardButton('Узнать активации на эту неделю',callback_data='week_activations'))
@@ -41,7 +42,9 @@ def register_name(query):
     print("QUERY:")
     print(query)
     bot.answer_callback_query(query.id)
-    if query.data == 'register':
+    if query.data == 'test':
+        fileprocessor.print_all_clients()
+    elif query.data == 'register':
         print("Query to register")
         user.reset()
         msg = bot.send_message(query.message.chat.id, 'Как к вам обращаться?')
