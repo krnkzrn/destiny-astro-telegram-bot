@@ -28,9 +28,10 @@ def start_handler(message):
 def print_start_dialog(message_chat_id):
     markup = telebot.types.InlineKeyboardMarkup()
     markup.row(telebot.types.InlineKeyboardButton('Зарегистрироваться',callback_data='register'))
-    markup.row('Оформить подписку')
-    markup.row('Узнать активации на эту неделю')
-    markup.row('Помощь','Связаться с нами')
+    markup.row(telebot.types.InlineKeyboardButton('Оформить подписку',callback_data='subscribe'))
+    markup.row(telebot.types.InlineKeyboardButton('Узнать активации на эту неделю',callback_data='week_activations'))
+    markup.row(telebot.types.InlineKeyboardButton('Помощь',callback_data='help'),
+               telebot.types.InlineKeyboardButton('Связаться с нами',callback_data='contacts'))
 
     is_dialog_in_progress = True
     bot.send_message(message_chat_id, 'Чем я могу вам помочь? В любой момент вы можете прервать диалог с помощью команды /end', reply_markup=markup)
