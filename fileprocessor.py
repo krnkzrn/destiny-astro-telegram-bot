@@ -2,8 +2,8 @@ import pandas
 # import datetime
 import user
 
-# df = pandas.read_csv('resources/activations.csv',header=0,parse_dates=['Дата','Время'])
-dc = pandas.read_csv('resources/client_base.csv',header=0)
+# df = pandas.read_csv('resources/activations.csv',header=0,parse_dates=['Дата','Время'],index_col=False)
+dc = pandas.read_csv('resources/client_base.csv',header=0,index_col=False)
 
 # today = datetime.date.today()
 # print('Today is ',today)
