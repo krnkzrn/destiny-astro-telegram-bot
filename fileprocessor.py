@@ -21,9 +21,13 @@ def add_client(client):
 
 def print_all_clients():
     print(dc)
+    print(dc['id'])
+    print(dc['Активная подписка'])
 
 def is_client_active(userid):
-    print(dc[(dc['id']==userid)])
+    print('id = {i}'.format(i=userid))
+    print(dc[(dc['id']==userid)]['Активная подписка'])
+    return dc[(dc['id']==userid)]['Активная подписка']
 
 # for index, row in dc.iterrows():
 #     print(row['НС дня рождения'], row['НС года рождения'], row['ЗВ дня рождения'], row['ЗВ года рождения'])
