@@ -3,7 +3,7 @@ import pandas
 import user
 
 # df = pandas.read_csv('resources/activations.csv',header=0,parse_dates=['Дата','Время'],index_col=False)
-dc = pandas.read_csv('resources/client_base.csv',header=0,index_col=False)
+dc = pandas.read_csv('resources/client_base.csv',header=0)
 
 # today = datetime.date.today()
 # print('Today is ',today)
@@ -21,13 +21,10 @@ def add_client(client):
 
 def print_all_clients():
     print(dc)
-    print(dc['id'])
-    print(dc['Активная подписка'])
 
 def is_client_active(userid):
     print('id = {i}'.format(i=userid))
-    print(dc[(dc['id']==userid)]['Активная подписка'])
-    return dc[(dc['id']==userid)]['Активная подписка']
+    return dc[dc['id']==userid]['Активная подписка'][0]
 
 # for index, row in dc.iterrows():
 #     print(row['НС дня рождения'], row['НС года рождения'], row['ЗВ дня рождения'], row['ЗВ года рождения'])

@@ -39,7 +39,6 @@ def reset_dialog(message):
 
 @bot.callback_query_handler(func=lambda call:True)
 def register_name(query):
-    print("QUERY:")
     print(query)
     bot.answer_callback_query(query.id)
     if query.data == 'test':
@@ -56,14 +55,17 @@ def register_name(query):
         bot.send_message(query.message.chat.id, 'В разработке')
 
 def register_save_name(message):
+    print(message)
     user.name = message.text
     register_request_birthday(message)
 
 def register_request_birthday(message):
+    print(message)
     msg = bot.send_message(message.chat.id, 'Введите дату своего рождения (формат: дд.мм.гггг)')
     bot.register_next_step_handler(msg, register_birthday)
 
 def register_birthday(message):
+    print(message)
     try:
         user.birthdate = datetime.datetime.strptime(message.text,'%d.%m.%Y')
         user.userid = message.from_user.id
