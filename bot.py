@@ -49,7 +49,7 @@ def register_name(query):
         msg = bot.send_message(query.message.chat.id, 'Как к вам обращаться?')
         bot.register_next_step_handler(msg, register_save_name)
     elif query.data == 'subscribe':
-        is_active = fileprocessor.is_client_active(query.message.from_user.id)
+        is_active = fileprocessor.is_client_active(query.from_user.id)
         bot.send_message(query.message.chat.id, 'У вас {ny}активная подписка'.format(ny=(is_active and '' or 'не ')))
     else:
         bot.send_message(query.message.chat.id, 'В разработке')
