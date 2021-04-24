@@ -49,10 +49,10 @@ def register_name(query):
         bot.register_next_step_handler(msg, register_save_name)
     elif query.data == 'subscribe':
         client = fileprocessor.get_client(query.from_user.id)
-        print('Client: {c}'.format(c=client))
+        print('Client:\n{c}'.format(c=client))
         if client is None:
             s = 'Вы не зарегистрированы'
-        elif client['Активная подписка']:
+        elif client.at[0,'Активная подписка']:
             s = 'У вас активная подписка'
         else :
             s = 'У вас не активная подписка'

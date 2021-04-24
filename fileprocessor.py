@@ -23,8 +23,7 @@ def print_all_clients():
     print(dc)
 
 def get_client(userid):
-    print('id = {i}'.format(i=userid))
-    return dc[dc['id']==userid]
+    return dc[dc['id']==userid].reset_index(drop=True)
 
 # for index, row in dc.iterrows():
 #     print(row['НС дня рождения'], row['НС года рождения'], row['ЗВ дня рождения'], row['ЗВ года рождения'])
