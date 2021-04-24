@@ -44,13 +44,19 @@ def register_name(query):
     if query.data == 'test':
         fileprocessor.print_all_clients()
     elif query.data == 'register':
-        print("Query to register")
         user.reset()
         msg = bot.send_message(query.message.chat.id, 'Как к вам обращаться?')
         bot.register_next_step_handler(msg, register_save_name)
     elif query.data == 'subscribe':
-        is_active = fileprocessor.is_client_active(query.from_user.id)
-        bot.send_message(query.message.chat.id, 'У вас {ny}активная подписка'.format(ny=(is_active and '' or 'не ')))
+        client = fileprocessor.get_client(query.from_user.id)
+        print('Client: {c}'.format(c=client))
+        if client is None:
+            s = 'Вы не зарегистрированы'
+        elif client['Активная подписка']:
+            s = 'У вас активная подписка'
+        else :
+            s = 'У вас не активная подписка'
+        bot.send_message(query.message.chat.id, s)
     else:
         bot.send_message(query.message.chat.id, 'В разработке')
 
