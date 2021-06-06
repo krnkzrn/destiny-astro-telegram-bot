@@ -28,17 +28,19 @@ def __init__():
 # todo probably do same for saveDC
 
 def add_client(client):
+    global clients
     if isinstance(client, user.User) :
-        global clients
         clients = clients.append(client.asdict(), ignore_index=True)
         clients.to_csv('resources/client_base.csv')
         ya.save_clients()
 
 # todo remove?
 def print_all_clients():
+    global clients
     print(clients)
 
 def get_client(userid):
+    global clients
     return clients[clients['id'] == userid].reset_index(drop=True)
 
 # for index, row in dc.iterrows():
