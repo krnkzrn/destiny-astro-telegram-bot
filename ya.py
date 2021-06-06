@@ -6,7 +6,10 @@ remote_activations_file = 'test/activations.csv'
 local_clients_file = 'resources/client_base.csv'
 local_activations_file = 'resources/activations.csv'
 
+
 yadisk_token = os.environ['YADISK_TOKEN']
+
+print('YADISK TOKEN = '+yadisk_token)
 
 class DADisk:
     y=yadisk.YaDisk(yadisk_token)
