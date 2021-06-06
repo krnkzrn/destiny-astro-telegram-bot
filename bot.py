@@ -9,6 +9,14 @@ import datetime
 import fileprocessor
 import user
 
+# +todo add resources file with symbols mapped to numbers and readable names
+# todo parse(?) html from calc
+
+# todo check userid in registered users, if we know that user - show another menu (no options to register)
+# todo add link to site with natal map after registration
+
+# todo how to pay for subscription? - link to payment system (to pay and than process payment manually)
+
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
 

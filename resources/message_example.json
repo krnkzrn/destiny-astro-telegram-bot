@@ -1,0 +1,53 @@
+{
+  'content_type': 'text',
+  'message_id': 28,
+  'from_user': {
+    'id': 314642066,
+    'first_name': 'Karina',
+    'username': 'krnkzrn',
+    'last_name': None
+  },
+  'date': 1618319971,
+  'chat': {
+    'type': 'group',
+    'last_name': None,
+    'first_name': None,
+    'username': None,
+    'id': -543753474,
+    'title': 'Test bot',
+    'all_members_are_administrators': True
+  },
+  'forward_from_chat': None,
+  'forward_from': None,
+  'forward_date': None,
+  'reply_to_message': None,
+  'edit_date': None,
+  'text': '/go',
+  'entities': [
+    <telebot.types.MessageEntity
+    object
+    at
+    0x7fbac1166cc0>
+  ],
+  'audio': None,
+  'document': None,
+  'photo': None,
+  'sticker': None,
+  'video': None,
+  'voice': None,
+  'caption': None,
+  'contact': None,
+  'location': None,
+  'venue': None,
+  'new_chat_member': None,
+  'left_chat_member': None,
+  'new_chat_title': None,
+  'new_chat_photo': None,
+  'delete_chat_photo': None,
+  'group_chat_created': None,
+  'supergroup_chat_created': None,
+  'channel_chat_created': None,
+  'migrate_to_chat_id': None,
+  'migrate_from_chat_id': None,
+  'pinned_message': None
+}
