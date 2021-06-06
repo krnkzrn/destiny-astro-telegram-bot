@@ -3,16 +3,6 @@ import pandas
 import user
 import ya
 
-global clients
-global activations
-
-def __init__():
-    global clients, activations
-    ya.load_clients()
-    ya.load_activations()
-    clients = pandas.read_csv('resources/client_base.csv', header=0)
-    activations = pandas.read_csv('resources/activations.csv.csv', header=0)
-
 # today = datetime.date.today()
 # print('Today is ',today)
 #
@@ -28,7 +18,8 @@ def __init__():
 # todo probably do same for saveDC
 
 def add_client(client):
-    global clients
+    ya.load_clients()
+    clients = pandas.read_csv('resources/client_base.csv', header=0)
     if isinstance(client, user.User) :
         clients = clients.append(client.asdict(), ignore_index=True)
         clients.to_csv('resources/client_base.csv')
@@ -36,11 +27,13 @@ def add_client(client):
 
 # todo remove?
 def print_all_clients():
-    global clients
+    ya.load_clients()
+    clients = pandas.read_csv('resources/client_base.csv', header=0)
     print(clients)
 
 def get_client(userid):
-    global clients
+    ya.load_clients()
+    clients = pandas.read_csv('resources/client_base.csv', header=0)
     return clients[clients['id'] == userid].reset_index(drop=True)
 
 # for index, row in dc.iterrows():
