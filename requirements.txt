@@ -3,3 +3,4 @@ PyTelegramBotAPI==2.2.3
 schedule
 pandas
 datetime
+yadisk
