@@ -6,13 +6,14 @@ remote_activations_file = 'test/activations.csv'
 local_clients_file = 'resources/client_base.csv'
 local_activations_file = 'resources/activations.csv'
 
-
+yadisk_application_id = os.environ['YADISK_APPID']
+yadisk_pass = os.environ['YADISK_PASS']
 yadisk_token = os.environ['YADISK_TOKEN']
 
 print('YADISK TOKEN = '+yadisk_token)
 
 class DADisk:
-    y=yadisk.YaDisk(yadisk_token)
+    y=yadisk.YaDisk(yadisk_application_id, yadisk_pass, yadisk_token)
 
     def load_clients(self):
         if self.y.check_token():
