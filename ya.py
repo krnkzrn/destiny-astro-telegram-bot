@@ -10,19 +10,17 @@ yadisk_application_id = os.environ['YADISK_APPID']
 yadisk_pass = os.environ['YADISK_PASS']
 yadisk_token = os.environ['YADISK_TOKEN']
 
-print('YADISK TOKEN = '+yadisk_token)
-
 class DADisk:
     y=yadisk.YaDisk(yadisk_application_id, yadisk_pass, yadisk_token)
 
     def load_clients(self):
-        if self.y.check_token() & self.y.existst(remote_clients_file):
+        if self.y.check_token() & self.y.exists(remote_clients_file):
             self.y.download(remote_clients_file,local_clients_file)
         else:
             print('Failed to load clients due to unresolved token')
 
     def load_activations(self):
-        if self.y.check_token() & self.y.existst(remote_activations_file):
+        if self.y.check_token() & self.y.exists(remote_activations_file):
             self.y.download(remote_activations_file,local_activations_file)
         else:
             print('Failed to load activation due to unresolved token')
