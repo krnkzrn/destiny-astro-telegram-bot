@@ -17,22 +17,24 @@ import ya
 # todo add methof getDC() where check flag if load success, if not - load again
 # todo probably do same for saveDC
 
+y = ya.DADisk()
+
 def add_client(client):
-    ya.load_clients()
+    y.load_clients()
     clients = pandas.read_csv('resources/client_base.csv', header=0)
     if isinstance(client, user.User) :
         clients = clients.append(client.asdict(), ignore_index=True)
         clients.to_csv('resources/client_base.csv')
-        ya.save_clients()
+        y.save_clients()
 
 # todo remove?
 def print_all_clients():
-    ya.load_clients()
+    y.load_clients()
     clients = pandas.read_csv('resources/client_base.csv', header=0)
     print(clients)
 
 def get_client(userid):
-    ya.load_clients()
+    y.load_clients()
     clients = pandas.read_csv('resources/client_base.csv', header=0)
     return clients[clients['id'] == userid].reset_index(drop=True)
 
